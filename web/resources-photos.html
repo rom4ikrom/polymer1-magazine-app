@@ -1,0 +1,151 @@
+<link rel="import" href="components/paper-card/paper-card.html">
+<link rel="import" href="components/iron-ajax/iron-ajax.html">
+<link rel="import" href="components/iron-list/iron-list.html">
+<link rel="import" href="stretch-photo.html">
+<dom-module id="resources-photos">
+
+    <template>
+
+        <style is="custom-style">
+            /* CSS rules for your element */
+            .container {
+                margin: 20px 10px 20px 10px;
+                text-align: center;
+            }
+            
+            iron-list {
+                height: 100vh;
+            }
+            
+            .container .photoContainer {
+                display: contents;
+            }
+            
+            .photo {
+                position: relative;
+                display: inline-block;
+                width: 320px;
+                height: 215px;
+                margin: 10px;
+            }
+            
+            .photo:hover {
+               cursor: pointer; 
+            }
+            
+            .container paper-card {
+                display: none;
+                position: fixed;
+                width: 500px;
+                height: 550px;
+                top: 50%;
+                left: 50%;
+                margin-left: -250px;
+                margin-top: -275px;
+            }
+            
+            paper-card #iconClose {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                color: white;
+            }
+            
+            paper-card #iconClose:hover {
+                background-color: #b3bfd3;
+                background-clip: border-box;
+                border: 1px solid #b3bfd3;
+                border-radius: 20px;
+            }
+            
+            .addButton {
+                width: 50%;
+                border: 1px solid green;
+                padding: 7px 10px;
+                border-radius: 20px;
+                margin: 0 auto;
+            }
+            
+            .addButton:hover {
+                cursor: pointer;
+                background-color: green;
+                color: white;
+            }
+
+        </style>
+
+        <!-- View -->
+        <!-- local DOM for your element -->
+        <iron-ajax auto url="data/photos.json" handle-as="json" last-response="{{photos}}"></iron-ajax>
+        
+        <div class="container">
+            <iron-list items="{{photos}}" as="photo">
+                <template>
+                    
+                    <div class="photoContainer" on-tap="onTapViewPhotoInfo">
+                        <img id="{{photo.id}}" class="photo" src="{{photo.imgPath}}">
+                    </div>
+                    
+                </template>
+            </iron-list>
+            
+            <paper-card id="photoInfo" image="{{photoImgPath}}">
+                <paper-icon-button id="iconClose" icon="close" on-tap="onTapClosePhotoInfo"></paper-icon-button>
+                <div class="card-content">
+                    <h3>Photo Information</h3>
+                    <p>Photographer Full Name: {{photoMaker}}</p>
+                    <p>Upload date: {{photoDate}}</p>
+                    <div class="addButton">Add to Photo Work List</div>
+                </div>
+            </paper-card>
+            
+        </div>
+        
+    </template>
+
+    <script>
+        // Controller
+        // element registration
+        Polymer({
+            is: "resources-photos",
+            
+            attached: function() {
+                var items = document.getElementById("items");
+            },
+            
+            properties: {
+                photoImgPath: {
+                    type: String,
+                },
+                photoMaker: {
+                    type: String,
+                },
+                photoDate: {
+                    type: String,
+                },
+                
+            },
+            
+            onTapViewPhotoInfo: function(e) {
+                var photoInfo = document.getElementById("photoInfo");
+                
+                photoInfo.style.display = "block";
+                
+                const array = this.photos;
+                var id = e.target.getAttribute("id");
+                
+                this.photoImgPath = array[id-1].imgPath;
+                this.photoMaker = array[id-1].maker;
+                this.photoDate = array[id-1].date;
+            },
+            
+            onTapClosePhotoInfo: function(e) {
+                var photoInfo = document.getElementById("photoInfo");
+                
+                photoInfo.style.display = "none";
+            }
+        });
+    </script>
+
+</dom-module>
+

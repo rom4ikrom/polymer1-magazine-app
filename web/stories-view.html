@@ -1,0 +1,86 @@
+<dom-module id="stories-view">
+
+    <link rel="import" href="components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="components/iron-list/iron-list.html">
+    <template>
+
+        <style is="custom-style">
+            .container {
+                margin: 1em;
+                padding: 0.5em;
+            }
+            iron-list {
+                height: 100vh;
+            }
+            .story {
+                padding: 1em;
+                font-size: 20px;
+            }
+            .story:hover {
+                background-color: #a0c4ff;
+                cursor: pointer;
+            }
+        </style>
+        <iron-ajax auto url="data/stories.json" handle-as="json" last-response="{{stories}}"></iron-ajax>
+
+        <div class="container">
+            <iron-list items="{{stories}}" as="story">
+                <template>
+                    <div class="story" on-tap="onTapViewStory" 
+                         story-title="{{storyTitle}}"
+                         story-topic="{{storyTopic}}"
+                         story-content="{{storyContent}}"
+                         story-img-path="{{storyImgPath}}"
+                         story-selected="{{storySelected}}"
+                         id="[[story.id]]">
+                        [[story.title]]
+                    </div> 
+                </template>
+            </iron-list>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: "stories-view",
+
+            properties: {
+                storyTitle: {
+                    type: String,
+                    notify: true,
+                },
+                storyTopic: {
+                    type: String,
+                    notify: true,
+                },
+                storyContent: {
+                    type: String,
+                    notify: true,
+                },
+                storyImgPath: {
+                    type: String,
+                    notify: true,
+                },
+                storySelected: {
+                    type: String,
+                    notify: true,
+                }
+            },
+            
+            onTapViewStory: function (e) {
+                const array = this.stories;
+                var id = e.target.getAttribute("id");
+                this.storyTitle = array[id - 1].title;
+                this.storyTopic = array[id - 1].topic;
+                this.storyContent = array[id - 1].content;
+                this.storyImgPath = array[id - 1].imgPath;
+                this.storySelected = "two";
+            },
+
+        });
+
+
+    </script>
+
+
+</dom-module>

@@ -1,0 +1,136 @@
+<!-- Polymer -->
+<link rel="import" href="components/polymer/polymer.html">
+
+<!-- Layout -->
+<link rel="import" href="components/iron-flex-layout/iron-flex-layout.html">
+
+<!-- Page Content -->
+<link rel="import" href="components/iron-pages/iron-pages.html">
+
+<!-- Menu -->
+<link rel="import" href="components/paper-menu/paper-menu.html">
+<link rel="import" href="components/paper-item/paper-item.html">
+
+<!-- Paper tabs -->
+<link rel="import" href="components/paper-tabs/paper-tabs.html">
+
+<!-- Paper tool bar -->
+<link rel="import" href="components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="components/iron-icons/iron-icons.html">
+<link rel="import" href="components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+
+
+
+<!-- Style -->
+<link rel="import" href="components/paper-styles/paper-styles.html">
+
+<!-- Custom elements -->
+<link rel="import" href="story-view.html">
+<link rel="import" href="story-edit.html">
+<link rel="import" href="magazine-header.html">
+<link rel="import" href="story-tools.html">
+<link rel="import" href="stories-view.html">
+<link rel="import" href="create-story.html">
+
+<link rel="import" href="resources-tools.html">
+
+<dom-module id="it-magazine-edit-app">
+
+    <template>
+        <style is="custom-style">
+            /* all elements in this host in the web component or by using class */
+
+            .flex-horizontal {
+                @apply(--layout-horizontal);
+            }
+            .flex-menu {
+                @apply(--layout-flex-2);
+                border-right: 1px solid var(--paper-blue-900);
+            }
+            .flex-content {
+                @apply(--layout-flex-12);
+            }
+
+            paper-menu {
+                padding-top: 0px;
+            }
+
+        </style>
+
+        <magazine-header></magazine-header>
+
+        <div class="container flex-horizontal">
+
+
+            <div class="horizontal-section flex-menu" id="sidebar">
+                <paper-menu selected="{{selectedMenu}}" attr-for-selected="name">
+                    <paper-item name="storyTools">Story Tools</paper-item>
+                    <paper-item name="resources">Resources</paper-item>
+                </paper-menu>
+            </div>
+
+            <div class="container flex-content">
+                <paper-toolbar>
+                    <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
+                    <div class="title">Title</div>
+                    <paper-icon-button icon="add" on-tap="onTapCreateNewStory">+</paper-icon-button>
+                </paper-toolbar>                
+
+                <iron-pages selected = "[[selectedMenu]]" attr-for-selected="name">
+
+                    <div name="storyTools">
+                        <story-tools></story-tools>
+                    </div>
+
+                    <div name="resources">
+                        <resources-tools></resources-tools>
+                    </div>
+                    
+                    <div name="storyCreate">
+                        <create-story></create-story>
+                    </div>
+                    
+                </iron-pages>
+
+            </div>
+
+        </div>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "it-magazine-edit-app",
+
+            properties: {
+                selectedMenu: String,
+            },
+
+            ready: function () {
+                this.selectedMenu = "storyTools";
+            },
+            menuAction: function(e) {
+                var sidebar = document.getElementById("sidebar");
+                
+                if(sidebar.style.display === "none") {
+                    sidebar.style.display = 'block';
+                } else {
+                    sidebar.style.display = 'none';
+                }
+                
+            },
+            onTapCreateNewStory: function(e) {
+                //var createStory = document.getElementById("createStory");
+                
+                //createStory.style.display = "block";
+                
+                this.selectedMenu = "storyCreate";
+            }
+
+        });
+    </script>
+
+
+</dom-module>

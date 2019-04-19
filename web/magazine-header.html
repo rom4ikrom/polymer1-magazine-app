@@ -1,0 +1,61 @@
+<dom-module id="magazine-header">
+
+    <template>
+
+        <style is="custom-style">
+            /* CSS rules for your element */
+
+            .container {
+                text-align: center;
+                height: 250px;
+                color: #fff;
+                /*background-color: #8eb4f2 #b3c6e5*/;
+                background-image: url('images/headerIT.jpg');
+            }
+
+            h2 {
+                margin-top: 0px;
+                padding-top: 30px;
+                font-size: 40px;
+                /* Adding stroke to text */
+                text-shadow:
+                    -1px -1px 0 #000,  
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
+            }
+            
+            p {
+                font-size: 25px;
+                font-style: italic;
+            }
+
+        </style>
+
+        <!-- View -->
+        <!-- local DOM for your element -->
+        <div class="container">
+            <h2>IT in the Valley</h2>
+            <p>Editing Department</p>
+        </div>
+
+
+    </template>
+
+    <script>
+        // Controller
+        // element registration
+        Polymer({
+            is: "magazine-header",
+
+            // add properties and methods on the element's prototype
+            properties: {
+                // declare properties for the element's publiv API
+                // model
+            },
+
+        });
+    </script>
+
+</dom-module>
+

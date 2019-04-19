@@ -1,0 +1,69 @@
+<link rel="import" href="resources-stories-list.html">
+<link rel="import" href="resources-photos.html">
+<link rel="import" href="resources-adverts-list.html">
+<dom-module id="resources-tools">
+
+    <template>
+
+        <style is="custom-style">
+            /* CSS rules for your element */
+            :host {
+                --paper-tabs-selection-bar-color: #ffff00;
+            }
+            
+            paper-tabs {
+                background-color: var(--paper-blue-900);
+                color: #fff;
+            }
+
+        </style>
+
+        <!-- View -->
+        <!-- local DOM for your element -->
+        <paper-tabs id="tabs" class="flex-content" selected="{{selectedTab}}" attr-for-selected="name">
+            <paper-tab name="one">Journalist Stories</paper-tab>
+            <paper-tab name="two">Photos</paper-tab>
+            <paper-tab name="three">Advertisements</paper-tab>
+        </paper-tabs>
+
+        <iron-pages selected = "[[selectedTab]]" attr-for-selected="name">
+            
+            <div name="one">
+                <resources-stories-list></resources-stories-list>
+            </div>
+            
+            <div name="two">
+                <resources-photos></resources-photos>
+            </div>
+
+            <div name="three">
+                <resources-adverts-list></resources-adverts-list>
+            </div>
+        </iron-pages>
+
+
+
+    </template>
+
+    <script>
+        // Controller
+        // element registration
+        Polymer({
+            is: "resources-tools",
+
+            // add properties and methods on the element's prototype
+            properties: {
+                seletedTab: String,
+                
+                // declare properties for the element's publiv API
+                // model
+            },
+            
+            ready: function(){
+                this.selectedTab = "one";
+            },
+
+        });
+    </script>
+
+</dom-module>

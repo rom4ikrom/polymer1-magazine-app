@@ -1,0 +1,112 @@
+<dom-module id="create-story">
+
+    <template>
+
+        <style>
+            /* CSS rules for your element */
+            .container {
+                margin: 1em 20px 20px 30px;
+                height: 100vh;
+            }
+
+            .label {
+                font-size: 20px;
+            }
+
+            input[type=text], textarea {
+                width: 90%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+                font-size: 15px;
+            }
+
+            textarea {
+                resize: none;
+            }
+
+            input[type=text]:focus, textarea:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+
+            .btn {
+                font-size: 20px;
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px 20px;
+                border: none;
+                cursor: pointer;
+                width: 40%;
+                margin: 0;
+                margin-bottom: 20px;
+                opacity: 0.8;
+            }
+
+            .btn:hover {
+                opacity: 1;
+            }
+            
+            .text-center {
+                text-align: center;
+            }
+
+        </style>
+
+        <!-- View -->
+        <!-- local DOM for your element -->
+        <div class="container">
+            
+            <div class="text-center">
+                <h2>Create New Story</h2>
+            </div>
+
+            <div class="label" id="storyTitle" story-title="{{storyTitle}}">Story Title</div>
+            <input type="text" id="editStoryTitle" value="{{storyTitle}}"/>
+
+            <div class="label" id="storyTopic" story-topic="{{storyTopic}}">Story Topic</div>
+            <input type="text" id="editStoryTopic" value="{{storyTopic}}"/>
+
+            <div class="label" id="storyContent" story-content="{{storyContent}}">Story Content</div>
+            <textarea cols="1" rows="10" id="editStoryContent" value="{{storyContent}}"></textarea>
+
+            <button class="btn" value="value" on-tap="onClickAction">Create Story</button>
+        </div>
+
+
+    </template>
+
+    <script>
+        // Controller
+        // element registration
+        Polymer({
+            is: "create-story",
+
+            // add properties and methods on the element's prototype
+            properties: {
+
+                storyTitle: {
+                    type: String,
+                    notify: true,
+                },
+
+                storyTopic: {
+                    type: String,
+                    notify: true,
+                },
+                storyContent: {
+                    type: String,
+                    notify: true,
+                },
+                storyImgPath: {
+                    type: String,
+                    notify: true,
+                }
+            },
+
+        });
+    </script>
+
+</dom-module>
+
