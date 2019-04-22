@@ -1,0 +1,88 @@
+<dom-module id="resources-stories-list">
+
+    <template>
+
+        <style is="custom-style">
+            /* CSS rules for your element */
+            .container {
+                margin: 1em;
+                padding: 0.5em;
+            }
+            
+            .iron-list{
+                height: 100vh;
+            }
+            
+            .jstory-container .maker {
+                font-size: 20px;
+                font-weight: bold;
+                margin: 3px;
+            }
+            
+            .jstory-container .topic {
+                font-size: 18px;
+                margin: 3px;
+            }
+            
+            .main-container {
+                border: 1px solid black;
+                border-radius: 20px;
+                margin: 10px 10px;
+                padding: 1em;
+            }
+            
+            #items {
+                height: 100px;
+            }
+            
+            .addButton {
+                position: absolute;
+                top: 30px;
+                right: 40px;
+                border: 1px solid green;
+                padding: 7px 10px;
+                border-radius: 20px;
+            }
+            
+            .addButton:hover {
+                cursor: pointer;
+                background-color: green;
+                color: white;
+            }
+
+
+        </style>
+
+        <!-- View -->
+        <!-- local DOM for your element -->
+        <iron-ajax auto url="data/journalistStories.json" handle-as="json" last-response="{{jstories}}"></iron-ajax>
+        <div class="container">
+            <iron-list items="{{jstories}}" as="jstory">
+                <template>
+                    
+                    <div class="jstory-container">
+                        <div class="main-container">
+                            <div class="addButton">Add to Story Work List</div>
+                            <div class="maker">{{jstory.maker}}</div>
+                            <div class="topic">{{jstory.topic}}</div>
+                            <div class="content">{{jstory.content}}</div>
+                        </div>
+                    </div>
+                    
+                </template>
+            </iron-list>
+        </div>
+    </template>
+
+    <script>
+        // Controller
+        // element registration
+        Polymer({
+            is: "resources-stories-list",
+
+            // add properties and methods on the element's prototype
+
+        });
+    </script>
+
+</dom-module>

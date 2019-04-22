@@ -1,0 +1,122 @@
+<link rel="import" href="story-view.html">
+<link rel="import" href="components/paper-button/paper-button.html">
+<dom-module id="story-edit">
+
+    <template>
+
+        <style is="custom-style">
+            /* CSS rules for your element */
+            .container {
+                margin: 1em 20px 20px 30px;
+                height: 100vh;
+            }
+
+            .label {
+                font-size: 20px;
+            }
+
+            input[type=text], textarea {
+                width: 90%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+                font-size: 15px;
+            }
+
+            textarea {
+                resize: none;
+            }
+
+            input[type=text]:focus, textarea:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+
+            .btn {
+                font-size: 20px;
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px 20px;
+                border: none;
+                cursor: pointer;
+                width: 40%;
+                margin: 0;
+                margin-bottom: 20px;
+                opacity: 0.8;
+            }
+
+            .btn:hover {
+                opacity: 1;
+            }
+            
+            paper-button.indigo {
+                background-color: var(--paper-indigo-500);
+                color: white;
+            }
+            paper-button.green {
+                background-color: var(--paper-green-500);
+                color: white;
+            }
+            paper-button.red {
+                background-color: var(--paper-red-500);
+                color: white;
+            }
+
+        </style>
+
+        <!-- View -->
+        <!-- local DOM for your element -->
+        <div class="container">
+
+            <div class="label" id="storyTitle" story-title="{{storyTitle}}">Story Title</div>
+            <input type="text" id="editStoryTitle" value="{{storyTitle}}"/>
+
+            <div class="label" id="storyTopic" story-topic="{{storyTopic}}">Story Topic</div>
+            <input type="text" id="editStoryTopic" value="{{storyTopic}}"/>
+
+            <div class="label" id="storyContent" story-content="{{storyContent}}">Story Content</div>
+            <textarea cols="1" rows="10" id="editStoryContent" value="{{storyContent}}"></textarea>
+            
+            <div id="controls">
+                <paper-button raised class="custom indigo">Publish Story</paper-button>
+                <paper-button raised class="custom green" on-tap="onTapUpdate">Update Story</paper-button>
+                <paper-button raised class="custom red">Delete Story</paper-button>
+            </div>
+        </div>
+
+
+    </template>
+
+    <script>
+        // Controller
+        // element registration
+        Polymer({
+            is: "story-edit",
+
+            // add properties and methods on the element's prototype
+            properties: {
+                storyTitle: {
+                    type: String,
+                    notify: true,
+                },
+                storyTopic: {
+                    type: String,
+                    notify: true,
+                },
+                storyContent: {
+                    type: String,
+                    notify: true,
+                },
+            },
+            onTapUpdate: function (e) {
+                this.storyTitle = this.$.editStoryTitle.value;
+                this.storyTopic = this.$.editStoryTopic.value;
+                this.storyContent = this.$.editStoryContent.value;
+            }
+
+        });
+    </script>
+
+</dom-module>
+

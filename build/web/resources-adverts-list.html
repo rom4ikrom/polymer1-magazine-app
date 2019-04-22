@@ -1,0 +1,88 @@
+<dom-module id="resources-adverts-list">
+
+    <template>
+
+        <style is="custom-style">
+            /* CSS rules for your element */
+            .container {
+                margin: 1em;
+                padding: 0.5em;
+            }
+            
+            .iron-list{
+                height: 100vh;
+            }
+            
+            .details-container .title {
+                font-size: 20px;
+                font-weight: bold;
+                margin: 3px;
+            }
+            
+            .details-container .subtitle{
+                font-size: 18px;
+                margin: 3px;
+            }
+            
+            .main-container {
+                border: 1px solid black;
+                border-radius: 20px;
+                margin: 10px 10px;
+                padding: 1em;
+            }
+            
+            #items {
+                height: 100px;
+            }
+            
+            .addButton {
+                position: absolute;
+                top: 30px;
+                right: 40px;
+                border: 1px solid green;
+                padding: 7px 10px;
+                border-radius: 20px;
+            }
+            
+            .addButton:hover {
+                cursor: pointer;
+                background-color: green;
+                color: white;
+            }
+
+
+        </style>
+
+        <!-- View -->
+        <!-- local DOM for your element -->
+        <iron-ajax auto url="data/details.json" handle-as="json" last-response="{{details}}"></iron-ajax>
+        <div class="container">
+            <iron-list items="{{details}}" as="detail">
+                <template>
+                    
+                    <div class="details-container">
+                        <div class="main-container">
+                            <div class="addButton">Add to Adverts Work List</div>
+                            <div class="title">{{detail.companyName}}</div>
+                            <div class="subtitle">{{detail.firstName}} {{detail.lastName}}</div>
+                            <div class="content">{{detail.content}}</div>
+                        </div>
+                    </div>
+                    
+                </template>
+            </iron-list>
+        </div>
+    </template>
+
+    <script>
+        // Controller
+        // element registration
+        Polymer({
+            is: "resources-adverts-list",
+
+            // add properties and methods on the element's prototype
+
+        });
+    </script>
+
+</dom-module>
