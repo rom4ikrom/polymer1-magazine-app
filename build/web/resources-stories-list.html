@@ -55,7 +55,11 @@
 
         <!-- View -->
         <!-- local DOM for your element -->
-        <iron-ajax auto url="data/journalistStories.json" handle-as="json" last-response="{{jstories}}"></iron-ajax>
+        <iron-ajax auto 
+                   url="http://localhost:8080/ITMagazineWebApp/rest/tools/resources/articles" 
+                   handle-as="json" 
+                   content-type="application/json"
+                   last-response="{{jstories}}"></iron-ajax>
         <div class="container">
             <iron-list items="{{jstories}}" as="jstory">
                 <template>
@@ -63,7 +67,7 @@
                     <div class="jstory-container">
                         <div class="main-container">
                             <div class="addButton">Add to Story Work List</div>
-                            <div class="maker">{{jstory.maker}}</div>
+                            <div class="maker">{{jstory.journalist.firstName}} {{jstory.journalist.lastName}}</div>
                             <div class="topic">{{jstory.topic}}</div>
                             <div class="content">{{jstory.content}}</div>
                         </div>

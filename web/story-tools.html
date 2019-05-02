@@ -33,6 +33,7 @@
                               story-topic="{{topic}}" 
                               story-content="{{content}}"
                               story-img-path="{{imgPath}}"
+                              story-advert="{{advert}}"
                               story-selected="{{selectedTab}}"></stories-view>
             </div>
             
@@ -40,6 +41,7 @@
                 <story-view story-title="{{title}}" 
                             story-topic="{{topic}}" 
                             story-content="{{content}}"
+                            story-advert="{{advert}}"
                             story-img-path="{{imgPath}}"></story-view>
             </div>
 
@@ -47,6 +49,7 @@
                 <story-edit story-title="{{title}}" 
                             story-topic="{{topic}}" 
                             story-content="{{content}}"
+                            story-advert="{{advert}}"
                             story-img-path="{{imgPath}}"></story-edit>
             </div>
         </iron-pages>
@@ -61,7 +64,7 @@
 
             // add properties and methods on the element's prototype
             properties: {
-                seletedTab: String,
+                selectedTab: String,
                 
                 title: {
                     type: String,
@@ -80,6 +83,10 @@
                     type: String,
                     notify: true,
                 },
+                advert: {
+                    type: String,
+                    notify: true,
+                }
                 
             },
             

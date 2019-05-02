@@ -21,7 +21,12 @@
                 cursor: pointer;
             }
         </style>
-        <iron-ajax auto url="data/stories.json" handle-as="json" last-response="{{stories}}"></iron-ajax>
+        <iron-ajax auto 
+                   method="GET"  
+                   url="http://localhost:8080/ITMagazineWebApp/rest/tools/completed/stories" 
+                   content-type="application/json"
+                   handle-as="json" 
+                   last-response="{{stories}}"></iron-ajax>
 
         <div class="container">
             <iron-list items="{{stories}}" as="story">
@@ -31,6 +36,7 @@
                          story-topic="{{storyTopic}}"
                          story-content="{{storyContent}}"
                          story-img-path="{{storyImgPath}}"
+                         story-advert="{{storyAdvert}}"
                          story-selected="{{storySelected}}"
                          id="[[story.id]]">
                         [[story.title]]
@@ -61,6 +67,10 @@
                     type: String,
                     notify: true,
                 },
+                storyAdvert: {
+                    type: String,
+                    notify: true,
+                },
                 storySelected: {
                     type: String,
                     notify: true,
@@ -74,7 +84,9 @@
                 this.storyTopic = array[id - 1].topic;
                 this.storyContent = array[id - 1].content;
                 this.storyImgPath = array[id - 1].imgPath;
+                this.storyAdvert = array[id - 1].advert.title;
                 this.storySelected = "two";
+                console.log(this.storyAdvert);
             },
 
         });

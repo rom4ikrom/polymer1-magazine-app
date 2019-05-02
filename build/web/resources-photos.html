@@ -73,7 +73,11 @@
 
         <!-- View -->
         <!-- local DOM for your element -->
-        <iron-ajax auto url="data/photos.json" handle-as="json" last-response="{{photos}}"></iron-ajax>
+        <iron-ajax auto 
+                   url="http://localhost:8080/ITMagazineWebApp/rest/tools/resources/photos"  
+                   handle-as="json"
+                   content-type="application/json"
+                   last-response="{{photos}}"></iron-ajax>
         
         <div class="container">
             <iron-list items="{{photos}}" as="photo">
@@ -128,7 +132,7 @@
                 var id = e.target.getAttribute("id");
                 
                 this.photoImgPath = array[id-1].imgPath;
-                this.photoMaker = array[id-1].maker;
+                this.photoMaker = array[id-1].photographer.firstName + " " + array[id-1].photographer.lastName;
                 this.photoDate = array[id-1].date;
             },
             

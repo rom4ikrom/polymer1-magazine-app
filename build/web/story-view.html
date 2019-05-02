@@ -9,7 +9,7 @@
                 min-height: 100vh;
             }
 
-            .container #title, .container #topic {
+            .container #title, .container #topic, .container #advert {
                 text-align: center;
             }
 
@@ -20,6 +20,10 @@
 
             #topic {
                 font-weight: normal;
+            }
+            
+            #advert {
+                font-size: 22px;
             }
 
             #storyImg {
@@ -33,6 +37,7 @@
             }
 
             #content {
+                margin: 10px 20px 10px 20px;
                 font-size: 20px;
             }
 
@@ -46,6 +51,8 @@
             <h3 id="topic" storyTopic="{{storyTopic}}">{{storyTopic}}</h3>
 
             <img id="storyImg" src="{{storyImgPath}}"/>
+            
+            <p id="advert" storyAdvert="{{storyAdvert}}">{{storyAdvert}}</p>
 
             <p id="content" storyContent="{{storyContent}}">{{storyContent}}</p>
 
@@ -73,6 +80,10 @@
                     notify: true,
                 },
                 storyContent: {
+                    type: String,
+                    notify: true,
+                },
+                storyAdvert: {
                     type: String,
                     notify: true,
                 },
